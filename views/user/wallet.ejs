@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XNY Crypto Wallet</title>
+    <style>
+        :root {
+            --dark-bg: #121220;
+            --dark-blue: #1a1a2e;
+            --card-bg: #1e3a5f;
+            --text-primary: #ffffff;
+            --text-secondary: #5a6e83;
+            --accent-teal: #64dfdf;
+            --accent-dark-teal: #2a9d8f;
+            --positive-green: #00ff9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0a2a33 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: var(--dark-blue);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-dark-teal), var(--accent-teal));
+            margin-right: 15px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .balance-section {
+            margin-bottom: 30px;
+        }
+
+        .currency {
+            color: var(--accent-teal);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .balance {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .action-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            color: var(--accent-teal);
+        }
+
+        .button-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 5px;
+            background-color: var(--dark-blue);
+            color: var(--text-secondary);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--accent-dark-teal), var(--accent-teal));
+            color: var(--text-primary);
+        }
+
+        .tab:first-child {
+            margin-left: 0;
+        }
+
+        .tab:last-child {
+            margin-right: 0;
+        }
+
+        .token-card {
+            background-color: var(--dark-blue);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .token-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .token-info {
+            flex: 1;
+        }
+
+        .token-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .token-price {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .token-value {
+            text-align: right;
+        }
+
+        .token-amount {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .token-quantity {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .token-change {
+            color: var(--positive-green);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 5px;
+        }
+
+        .change-arrow {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid var(--positive-green);
+            margin-right: 5px;
+        }
+
+        .xny-icon {
+            background: linear-gradient(135deg, var(--accent-dark-teal), var(--accent-teal));
+        }
+
+        .btc-icon {
+            background-color: #f7931a;
+        }
+
+        .eth-icon {
+            background-color: #627eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"></div>
+            <div class="title">Investing</div>
+        </div>
+
+        <div class="balance-section">
+            <div class="currency">NZD</div>
+            <div class="balance">$<%= wallet.balance %></div>
+        </div>
+
+        <div class="action-buttons">
+            <div class="action-button">
+                <div class="button-circle">B</div>
+                <div class="button-label">Buy</div>
+            </div>
+            <div class="action-button">
+                <div class="button-circle">S</div>
+                <div class="button-label">Sell</div>
+            </div>
+            <div class="action-button">
+                <div class="button-circle">S</div>
+                <div class="button-label">Send</div>
+            </div>
+            <div class="action-button">
+                <div class="button-circle">R</div>
+                <div class="button-label">Receive</div>
+            </div>
+            <div class="action-button">
+                <div class="button-circle">S</div>
+                <div class="button-label">Swap</div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="tab active">My crypto</div>
+            <div class="tab">All tokens</div>
+            <div class="tab">NFTs</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Sample data to render
+        const walletData = {
+            balance: "24,033.28",
+            tokens: [
+                {
+                    name: "XNY Token",
+                    symbol: "XNY",
+                    iconClass: "xny-icon",
+                    price: "14.28",
+                    value: "5,284.32",
+                    quantity: "370.05",
+                    change: "3.2"
+                },
+                {
+                    name: "Bitcoin",
+                    symbol: "₿",
+                    iconClass: "btc-icon",
+                    price: "38,398.99",
+                    value: "170.35",
+                    quantity: "0.0044",
+                    change: "4.2"
+                },
+                {
+                    name: "Ethereum",
+                    symbol: "Ξ",
+                    iconClass: "eth-icon",
+                    price: "3,399.45",
+                    value: "3,715.20",
+                    quantity: "1.09",
+                    change: "2.8"
+                }
+            ]
+        };
+
+    </script>
+</body>
+</html>
+
+
+

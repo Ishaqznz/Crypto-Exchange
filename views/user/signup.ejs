@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain - Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0933 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-squares {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 2px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .square1 { background-color: #4287f5; }
+        .square2 { background-color: #a64aff; }
+        .square3 { background-color: #2bcbff; }
+        .square4 { background-color: #5241f4; }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .signup-container {
+            background: rgba(30, 30, 50, 0.7);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 350px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .signup-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .signup-title span {
+            background: linear-gradient(90deg, #a64aff, #2bcbff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .signup-subtitle {
+            font-size: 12px;
+            color: #bbbbbb;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #bbbbbb;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2bcbff;
+            box-shadow: 0 0 0 2px rgba(43, 203, 255, 0.3);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #a64aff, #2bcbff);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #bbbbbb;
+        }
+        
+        .login-link a {
+            color: #2bcbff;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+            .signup-container {
+                padding: 20px 15px;
+            }
+            
+            .signup-title {
+                font-size: 20px;
+            }
+            
+            .form-input {
+                padding: 8px 10px;
+            }
+        }
+        
+        @media (min-height: 700px) {
+            .signup-container {
+                margin: 20px 0;
+            }
+        }
+
+        .disclaimer {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 20, 0.9);
+            border-radius: 10px;
+            padding: 16px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            max-width: 90%;
+            width: 320px;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border-left: 4px solid #2bcbff;
+            animation: slideInDown 0.4s forwards, fadeOut 0.4s 3.6s forwards;
+        }
+        
+        .notification-success {
+            border-left-color: #00ff9d;
+        }
+        
+        .notification-error {
+            border-left-color: #ff3e5f;
+        }
+        
+        .notification-icon {
+            flex-shrink: 0;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .notification-icon-success {
+            width: 24px;
+            height: 24px;
+            background-color: #00ff9d;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .notification-icon-success::before,
+        .notification-icon-success::after {
+            content: '';
+            position: absolute;
+            background-color: #111;
+        }
+        
+        .notification-icon-success::before {
+            width: 3px;
+            height: 9px;
+            left: 7px;
+            top: 12px;
+            transform: rotate(45deg);
+        }
+        
+        .notification-icon-success::after {
+            width: 13px;
+            height: 3px;
+            left: 10px;
+            top: 13px;
+            transform: rotate(45deg);
+        }
+        
+        .notification-content {
+            flex-grow: 1;
+        }
+        
+        .notification-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .notification-message {
+            font-size: 13px;
+            color: #cccccc;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            margin-left: 5px;
+            line-height: 1;
+        }
+        
+        .notification-close:hover {
+            color: white;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                transform: translate(-50%, -20px);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        /* Mobile optimization */
+        @media (max-width: 400px) {
+            .notification {
+                width: 95%;
+                padding: 12px 15px;
+            }
+            
+            .notification-icon {
+                margin-right: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo" style="justify-content: center;">
+            <div class="logo-squares">
+                <div class="square1"></div>
+                <div class="square2"></div>
+                <div class="square3"></div>
+                <div class="square4"></div>
+            </div>
+            <div class="logo-text">Blockchain</div>
+        </div>
+        
+        <div class="signup-header">
+            <h1 class="signup-title">Create your <span>crypto</span> account</h1>
+            <p class="signup-subtitle">Join the blockchain revolution</p>
+        </div>
+        
+        <form onsubmit="return signup(event)">
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" id="username" class="form-input" placeholder="Username">
+                <p class="error-message" id="username-error"></p>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" class="form-input" placeholder="Password">
+                <p class="error-message" id="password-error"></p>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" class="form-input" placeholder="Confirm password">
+                <p class="error-message" id="confirm-password-error"></p>
+            </div>
+        
+            <p class="disclaimer">⚠️ You cannot recover your password. Please save it securely.</p>
+        
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+        
+        <div class="login-link">
+            Already have an account? <a href="/login">Log in</a>
+        </div>
+    </div>
+
+
+
+    <!-- Add this notification template to your body (hidden by default) -->
+<div id="notification" class="notification notification-success" style="display: none;">
+    <div class="notification-icon">
+        <div class="notification-icon-success"></div>
+    </div>
+    <div class="notification-content">
+        <div class="notification-title">Success!</div>
+        <div class="notification-message">Account Created Successfully!</div>
+    </div>
+    <button class="notification-close">&times;</button>
+</div>
+
+
+
+</body>
+
+
+</html>
+
+
+
+<script>
+
+
+
+async function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = notification.querySelector('.notification-message');
+
+            notificationMessage.textContent = message || 'Account Created Successfully!';
+
+            notification.className = 'notification notification-' + type;
+
+            notification.style.display = 'flex';
+
+            notification.style.animation = 'none';
+            notification.offsetHeight; 
+            notification.style.animation = 'slideInDown 0.4s forwards, fadeOut 0.4s 3.6s forwards';
+
+            setTimeout(() => {
+                hideNotification();
+            }, 4000);
+        }
+        
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 400);
+        }
+
+        document.querySelector('.notification-close').addEventListener('click', hideNotification);
+
+
+
+
+
+    async function signup(event) {
+        event.preventDefault(); 
+
+        let isValid = true;
+
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        const passwordError = document.getElementById("password-error");
+        const confirmPasswordError = document.getElementById("confirm-password-error");
+
+        passwordError.textContent = "";
+        confirmPasswordError.textContent = "";
+
+        if (password.length < 6) {
+            passwordError.textContent = "Password must be at least 6 characters.";
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            isValid = false;
+        }
+
+        if (isValid) {
+            
+
+            const userName = document.getElementById('username').value
+
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ userName, password })
+            })
+
+            const result = await response.json()
+
+            if (result.success) {
+
+                showNotification(result.message, 'success')
+                setTimeout(() => {
+                    window.location.href = '/'; 
+                }, 2000); 
+
+                return;
+            }
+
+            const userNameError = document.getElementById('username-error')
+            userNameError.textContent = result.message || 'Username is already existed!'
+            return true;
+            
+        }
+
+        return false;
+    }
+</script>

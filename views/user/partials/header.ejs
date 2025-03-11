@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Home | Blockchain</title>
+	<title>Home | Xionary</title>
 	<meta name="description" content="The cryptocurrency exchange of trust for individual and institutional traders & investors. An ethereum token backed by a human individual" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="http://example.com/" />
@@ -35,9 +35,9 @@
 
 <body>
 	<!-- screen loader -->
-	<div class="screen_loader fixed inset-0 z-[60] grid place-content-center bg-black">
+	<!-- <div class="screen_loader fixed inset-0 z-[60] grid place-content-center bg-black">
 		<div class="lds-hourglass relative inline-flex h-20 w-20 after:m-2 after:block after:h-0 after:w-0 after:rounded-full after:border-[32px] after:border-primary after:border-r-transparent after:border-l-transparent"></div>
-	</div>
+	</div> -->
 
 	<div class="bg-black font-unbounded text-lg font-normal text-white antialiased">
 		<div class="relative h-full min-h-screen overflow-x-hidden bg-[url(../images/background.png)] bg-cover bg-fixed bg-center">
@@ -52,7 +52,7 @@
                             <span class="sr-only">logo</span>
                             <img src="assets/images/logo.png" alt="" class="w-full" />
                         </a>
-						<button type="button" class="wallet-btn relative hidden bg-primary p-3.5 text-lg text-black shadow-[4px_4px_0_#0D804F] duration-500 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-0 after:duration-300 hover:bg-transparent hover:text-white hover:after:left-auto hover:after:right-0 hover:after:w-full lg:block">
+						<button type="button" class="wallet-btn relative hidden bg-primary p-3.5 text-lg text-black shadow-[4px_4px_0_#0D804F] duration-500 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-0 after:duration-300 hover:bg-transparent hover:text-white hover:after:left-auto hover:after:right-0 hover:after:w-full lg:block" onclick="wallet()">
 							Wallet
 						</button>
 						<button type="button" onclick="toggleMenu()" class="block space-y-2 lg:hidden">
@@ -80,7 +80,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="/trade" class="nav-link">
+								<a href="/refer" class="nav-link">
 									<span class="shrink-0">
 										<svg width="36" height="36" viewBox="0 0 36 36" fill="none">
 											<g>
@@ -90,7 +90,7 @@
 											</g>
 										</svg>
 									</span>
-									<span>Trade risk</span>
+									<span>Refer and Earn</span>
 								</a>
 							</li>
 							<li>
@@ -143,7 +143,7 @@
 								</a>
 							</li>
 							<li class="sticky inset-x-0 bottom-0">
-								<button type="button" class="block w-full bg-primary p-3.5 text-black shadow-[0_4px_0_#0D804F] lg:hidden">Wallet</button>
+								<button type="button" class="block w-full bg-primary p-3.5 text-black shadow-[0_4px_0_#0D804F] lg:hidden" onclick="wallet()">Wallet</button>
 							</li>
 						</ul>
 					</div>
@@ -168,6 +168,10 @@
 	}
 
 	window.onload = findPath;
+
+	function wallet() {
+		window.location.href = 'signup'
+	}
 
 
 </script>
